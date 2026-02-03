@@ -3,209 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yassin Saoud — Digital Craftsman</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>Yassin Saoud | Frontend Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --bg: #000000;
-            --accent: #10b981; /* الزمردي */
-            --text-main: #ffffff;
-            --text-muted: #888888;
-            --card-hover: #0a0a0a;
+            --primary: #10b981; /* Emerald Green */
+            --bg: #0d0d0d;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.5;
-            padding: 0 5%;
+            background: var(--bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            /* التدرج اللوني في الخلفية كما في الفيديو */
+            background: radial-gradient(circle at top right, #064e3b, transparent 40%),
+                        radial-gradient(circle at bottom left, #022c22, transparent 40%);
+            background-attachment: fixed;
         }
 
-        /* Smooth Reveal Animation */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .container { max-width: 500px; margin: 0 auto; padding: 40px 20px; }
 
         /* Header */
-        nav {
-            height: 100px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #1a1a1a;
-        }
-
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; }
-        .contact-btn {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.9rem;
-            border: 1px solid #333;
-            padding: 8px 16px;
-            border-radius: 50px;
-            transition: 0.3s;
-        }
-        .contact-btn:hover { background: white; color: black; }
+        nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; }
+        .logo { font-weight: 800; font-size: 1.2rem; }
+        .menu-icon { font-size: 1.5rem; color: var(--primary); }
 
         /* Hero Section */
-        .hero {
-            padding: 150px 0 100px;
-            max-width: 900px;
-        }
+        .hero { text-align: left; margin-bottom: 50px; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1; margin-bottom: 10px; }
+        .hero .typing { color: var(--primary); border-right: 3px solid var(--primary); padding-right: 5px; animation: blink 0.7s infinite; }
+        .hero p { color: #aaa; margin: 20px 0; font-size: 1rem; }
 
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 800;
-            line-height: 0.9;
-            letter-spacing: -4px;
-            margin-bottom: 40px;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            line-height: 1.4;
-        }
-
-        .accent-text { color: var(--accent); }
-
-        /* Projects Section */
-        .section-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 60px;
-            text-transform: uppercase;
-            display: block;
-        }
-
-        .project-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 40px 0;
-            border-bottom: 1px solid #1a1a1a;
-            transition: 0.4s;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .project-row:hover { padding-left: 20px; border-color: var(--accent); }
-        .project-row h2 { font-size: 2.5rem; font-weight: 500; }
-        .project-tag { font-family: 'JetBrains Mono'; color: var(--text-muted); }
-
-        /* Status Section */
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin: 100px 0;
-        }
-
-        .status-item h4 { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 10px; }
-        .status-item p { font-size: 1.2rem; font-weight: 500; }
-
-        /* Footer */
-        footer {
-            padding: 100px 0 50px;
-            text-align: center;
-        }
-
-        .social-big {
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 50px;
-        }
-
-        .social-big a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin: 0 20px;
+        .btn-group { display: flex; gap: 15px; }
+        .btn { 
+            padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 600; 
+            display: flex; align-items: center; gap: 8px; font-size: 0.9rem;
+            background: var(--glass); border: 1px solid var(--glass-border); color: white;
             transition: 0.3s;
         }
+        .btn:hover { background: var(--primary); color: black; border-color: var(--primary); }
 
-        .social-big a:hover { color: var(--accent); }
-
-        .copyright {
-            font-family: 'JetBrains Mono';
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        /* Stats Cards */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 50px; }
+        .stat-card { 
+            background: var(--glass); border: 1px solid var(--glass-border); 
+            padding: 20px; border-radius: 20px; position: relative;
         }
+        .stat-card i { font-size: 1.5rem; color: var(--primary); margin-bottom: 15px; display: block; }
+        .stat-card h2 { font-size: 2rem; margin-bottom: 5px; }
+        .stat-card p { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Sections titles */
+        .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 30px; text-align: center; color: var(--primary); }
+
+        /* Contact Form */
+        .contact-box { background: var(--glass); padding: 30px; border-radius: 24px; border: 1px solid var(--glass-border); }
+        .input-group { margin-bottom: 20px; }
+        input, textarea { 
+            width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); 
+            padding: 15px; border-radius: 12px; color: white; outline: none;
+        }
+        input:focus { border-color: var(--primary); }
+        .send-btn { 
+            width: 100%; background: var(--primary); color: black; border: none; 
+            padding: 15px; border-radius: 12px; font-weight: 800; cursor: pointer;
+        }
+
+        /* Footer Socials */
+        .socials { margin-top: 40px; display: flex; flex-direction: column; gap: 10px; }
+        .social-item { 
+            display: flex; align-items: center; gap: 15px; background: var(--glass); 
+            padding: 15px; border-radius: 15px; text-decoration: none; color: white;
+            border: 1px solid var(--glass-border); transition: 0.3s;
+        }
+        .social-item:hover { transform: translateX(10px); background: rgba(16, 185, 129, 0.1); }
+
+        @keyframes blink { 50% { border-color: transparent; } }
 
     </style>
 </head>
 <body>
 
+<div class="container">
     <nav>
-        <div class="logo">YASSIN SAOUD</div>
-        <a href="mailto:yassinsaoud88@gmail.com" class="contact-btn">Let's Talk</a>
+        <div class="logo">Yassin Saoud</div>
+        <div class="menu-icon"><i class="fas fa-bars"></i></div>
     </nav>
 
-    <section class="hero reveal">
-        <h1>Building <br> <span class="accent-text">Digital</span> Crafts.</h1>
-        <p>Frontend Developer based in Morocco. Focused on creating clean, functional, and aesthetic web interfaces.</p>
+    <section class="hero">
+        <h1>Frontend</h1>
+        <h1 class="typing" id="type-text"></h1>
+        <p>Enhancing digital experiences that are smooth, scalable, and made to impress.</p>
+        <div class="btn-group">
+            <a href="#projects" class="btn">Projects <i class="fas fa-external-link-alt"></i></a>
+            <a href="#contact" class="btn">Contact <i class="fas fa-envelope"></i></a>
+        </div>
     </section>
 
-    <div class="status-grid reveal">
-        <div class="status-item">
-            <h4>LOCATION</h4>
-            <p>Casablanca, MA</p>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <i class="fas fa-code"></i>
+            <h2>02</h2>
+            <p>Total Projects</p>
         </div>
-        <div class="status-item">
-            <h4>CURRENTLY LEARNING</h4>
-            <p>Advanced HTML & CSS</p>
-        </div>
-        <div class="status-item">
-            <h4>AVAILABILITY</h4>
-            <p>Open for Learning Projects</p>
+        <div class="stat-card">
+            <i class="fas fa-certificate"></i>
+            <h2>01</h2>
+            <p>Certificates</p>
         </div>
     </div>
 
-    <span class="section-title reveal">Selected Experiments</span>
+    <h2 class="section-title">About Me</h2>
+    <p style="color: #bbb; text-align: center; line-height: 1.8; margin-bottom: 60px;">
+        Hello, I'm Yassin, a passionate developer based in Casablanca. Currently mastering HTML, CSS and modern web technologies to build the future of the web.
+    </p>
 
-    <a href="#" class="project-row reveal">
-        <h2>Semantic Web</h2>
-        <span class="project-tag">HTML5 / 2026</span>
-    </a>
+    <h2 class="section-title" id="contact">Contact Me</h2>
+    <div class="contact-box">
+        <div class="input-group"><input type="text" placeholder="Your Name"></div>
+        <div class="input-group"><input type="email" placeholder="Your Email"></div>
+        <div class="input-group"><textarea rows="4" placeholder="Your Message"></textarea></div>
+        <button class="send-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+    </div>
 
-    <a href="#" class="project-row reveal">
-        <h2>Style Systems</h2>
-        <span class="project-tag">CSS3 / 2026</span>
-    </a>
+    <div class="socials">
+        <a href="https://github.com/yassinsaoud88" class="social-item">
+            <i class="fab fa-github" style="color: #fff;"></i>
+            <span>Github</span>
+        </a>
+        <a href="mailto:yassinsaoud88@gmail.com" class="social-item">
+            <i class="fas fa-envelope" style="color: var(--primary);"></i>
+            <span>Email</span>
+        </a>
+    </div>
 
-    <a href="#" class="project-row reveal">
-        <h2>Future Project</h2>
-        <span class="project-tag">Coming Soon</span>
-    </a>
-
-    <footer>
-        <div class="social-big reveal">
-            <a href="https://github.com/yassinsaoud88">Github</a>
-            <a href="mailto:yassinsaoud88@gmail.com">Email</a>
-        </div>
-        <p class="copyright">Built with patience by Yassin Saoud © <span id="year"></span></p>
+    <footer style="text-align: center; padding: 40px; color: #555; font-size: 0.8rem;">
+        &copy; 2026 | Built by Yassin Saoud
     </footer>
+</div>
 
-    <script>
-        // Set Year
-        document.getElementById("year").innerHTML = new Date().getFullYear();
+<script>
+    // Typing Effect Logic
+    const text = "Developer";
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            document.getElementById("type-text").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, 200);
+        }
+    }
+    window.onload = type;
+</script>
 
-        // Reveal Animation Logic
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
 </body>
 </html>
