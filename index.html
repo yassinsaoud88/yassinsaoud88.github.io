@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHEILD | The Architect of Growth</title>
+    <title>Yassine Saoud | Sheild Final</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Outfit:wght@100;300;400;700&family=JetBrains+Mono:wght@100;400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
@@ -17,15 +15,10 @@
             theme: {
                 extend: {
                     colors: {
-                        black: '#050505',
-                        accent: '#00f3ff', // Neon Cyan
-                        deep: '#0a0a0f',
-                        glass: 'rgba(255, 255, 255, 0.03)'
-                    },
-                    fontFamily: {
-                        title: ['Syncopate', 'sans-serif'],
-                        body: ['Outfit', 'sans-serif'],
-                        code: ['JetBrains Mono', 'monospace']
+                        void: '#020202',
+                        accent: '#a78bfa',
+                        emerald: '#10b981',
+                        sky: '#3b82f6'
                     }
                 }
             }
@@ -33,510 +26,244 @@
     </script>
 
     <style>
-        /* -------------------------------------------------- */
-        /* MASTER QUANTUM STYLES                              */
-        /* -------------------------------------------------- */
-        :root {
-            --cursor-size: 20px;
-            --accent: #00f3ff;
-        }
+        * { cursor: none !important; }
+        body { background: #020202; color: #e5e7eb; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            cursor: none !important; /* Force hide native cursor */
-        }
+        /* Cursor */
+        #c-dot { position: fixed; width: 8px; height: 8px; background: #a78bfa; border-radius: 50%; z-index: 10000; pointer-events: none; }
+        #c-ring { position: fixed; width: 45px; height: 45px; border: 2px solid rgba(167, 139, 250, 0.4); border-radius: 50%; z-index: 9999; pointer-events: none; }
 
-        body {
-            background-color: #050505;
-            color: #fff;
-            font-family: 'Outfit', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+        /* Pop Animation */
+        .reveal { opacity: 0; transform: translateY(50px) scale(0.9); }
 
-        /* High-End Noise Overlay */
-        body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://grainy-gradients.vercel.app/noise.svg');
-            opacity: 0.04; pointer-events: none; z-index: 9999;
+        /* Tech Tags - Home */
+        .home-tag {
+            padding: 12px 24px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px; font-family: 'JetBrains Mono'; font-weight: 700; font-size: 16px;
+            transition: all 0.4s; color: #fff;
         }
+        .home-tag:hover { background: rgba(167, 139, 250, 0.2); border-color: #a78bfa; transform: scale(1.1); box-shadow: 0 0 20px rgba(167,139,250,0.4); }
 
-        /* Advanced Custom Cursor */
-        #cursor {
-            position: fixed; top: 0; left: 0;
-            width: var(--cursor-size); height: var(--cursor-size);
-            background: var(--accent); border-radius: 50%;
-            pointer-events: none; z-index: 10001;
-            mix-blend-mode: difference;
-            transition: transform 0.1s ease-out, background 0.3s ease;
+        /* Bento Stats - About */
+        .stat-card {
+            background: #0d0f14; border: 1px solid rgba(255,255,255,0.05); border-radius: 25px;
+            padding: 30px; transition: 0.4s; cursor: pointer; display: flex; flex-direction: column; gap: 15px;
         }
+        .stat-card:hover { border-color: #a78bfa; background: #12141c; transform: translateY(-10px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
 
-        #cursor-follower {
-            position: fixed; top: 0; left: 0;
-            width: 40px; height: 40px;
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            border-radius: 50%; pointer-events: none; z-index: 10000;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        /* Portfolio Tabs */
+        .tab-trigger { 
+            font-size: 20px; font-weight: 800; padding: 15px 35px; border-radius: 15px; 
+            transition: 0.4s; color: rgba(255,255,255,0.3); border: 2px solid transparent;
         }
+        .tab-trigger.active { color: #fff; background: rgba(167, 139, 250, 0.1); border-color: #a78bfa; }
 
-        /* Sections Aesthetics */
-        .section-padding { padding: 120px 0; }
-        
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
+        /* Icons Styling */
+        .icon-box {
+            padding: 25px; background: #0a0c10; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);
+            display: flex; flex-direction: column; align-items: center; gap: 10px; transition: 0.3s;
         }
-
-        /* Cybernetic Cards */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-panel:hover {
-            background: rgba(0, 243, 255, 0.02);
-            border-color: var(--accent);
-            box-shadow: 0 0 50px rgba(0, 243, 255, 0.1);
-        }
-
-        /* Infinite Scroll Text */
-        .scrolling-text {
-            white-space: nowrap;
-            display: flex;
-            gap: 2rem;
-            font-family: 'Syncopate', sans-serif;
-            font-weight: 700;
-            font-size: 8rem;
-            opacity: 0.02;
-            pointer-events: none;
-            position: absolute;
-        }
-
-        /* Magnetic Button */
-        .magnetic-wrap { display: inline-block; position: relative; }
-
-        /* Tech Loading Bar */
-        .skill-bar-bg {
-            width: 100%; height: 2px; background: rgba(255,255,255,0.05);
-            position: relative; margin-top: 10px;
-        }
-        .skill-bar-fill {
-            position: absolute; top: 0; left: 0; height: 100%;
-            background: var(--accent); width: 0;
-            box-shadow: 0 0 15px var(--accent);
-        }
-
-        /* GLITCH Effect on Text */
-        .glitch-hover:hover {
-            animation: glitch-anim 0.3s infinite;
-        }
-
-        @keyframes glitch-anim {
-            0% { transform: translate(0); text-shadow: -2px 0 red, 2px 0 blue; }
-            25% { transform: translate(-2px, 2px); }
-            50% { transform: translate(2px, -2px); text-shadow: 2px 0 red, -2px 0 blue; }
-            100% { transform: translate(0); }
-        }
-
-        /* 3D PERSPECTIVE CONTAINER */
-        .perspective-container {
-            perspective: 1000px;
-        }
-
-        /* HIDDEN ELEMENTS FOR INITIAL ANIM */
-        .reveal { opacity: 0; transform: translateY(30px); }
+        .icon-box:hover { transform: scale(1.1); border-color: #a78bfa; box-shadow: 0 0 20px rgba(167,139,250,0.2); }
     </style>
 </head>
-<body class="bg-black">
+<body>
 
-    <div id="cursor"></div>
-    <div id="cursor-follower"></div>
+    <div id="c-dot"></div>
+    <div id="c-ring"></div>
 
-    <div id="preloader" class="fixed inset-0 z-[2000] bg-black flex items-center justify-center">
-        <div class="text-center">
-            <div id="load-count" class="font-title text-5xl mb-4 text-accent">00</div>
-            <div class="w-48 h-[1px] bg-white/10 relative">
-                <div id="load-bar" class="absolute inset-0 bg-accent w-0 transition-all"></div>
-            </div>
-            <p class="font-code text-[10px] mt-4 tracking-[0.5em] text-white/30 italic">INITIALIZING_SHEILD_OS</p>
-        </div>
-    </div>
-
-    <nav class="fixed top-0 left-0 w-full z-[100] px-10 py-8 flex justify-between items-center mix-blend-difference">
-        <a href="#" class="font-title font-bold text-xl tracking-tighter group">
-            S<span class="text-accent group-hover:pl-2 transition-all">HEILD</span>
-        </a>
-        <div class="flex gap-12 font-code text-[10px] tracking-widest uppercase">
-            <a href="#about" class="hover:text-accent transition-colors">/ Profile</a>
-            <a href="#skills" class="hover:text-accent transition-colors">/ Stack</a>
-            <a href="#projects" class="hover:text-accent transition-colors">/ Lab</a>
-            <a href="#contact" class="hover:text-accent transition-colors">/ Connect</a>
+    <nav class="fixed top-0 w-full z-[1000] py-8 px-[8%] flex flex-row items-center backdrop-blur-xl border-b border-white/5">
+        <div class="text-2xl font-black tracking-tighter text-white mr-auto">Yassine Saoud</div>
+        <div class="hidden md:flex gap-12 font-mono text-sm uppercase tracking-widest ml-auto">
+            <a href="#home" class="hover:text-accent transition-colors">Home</a>
+            <a href="#about" class="hover:text-accent transition-colors">About</a>
+            <a href="#portfolio" class="hover:text-accent transition-colors">Portfolio</a>
+            <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
         </div>
     </nav>
 
-    <section class="min-h-screen flex items-center justify-center relative overflow-hidden hero-gradient">
-        <div class="scrolling-text top-1/2 -translate-y-1/2" id="bg-scroll">
-            <span>EVOLUTION • INNOVATION • GROWTH • SHEILD • </span>
-            <span>EVOLUTION • INNOVATION • GROWTH • SHEILD • </span>
-        </div>
-
-        <div class="container mx-auto px-6 z-10 text-center">
-            <p class="font-code text-accent text-xs mb-8 tracking-[0.8em] reveal">SYSTEM_VERSION_2026</p>
-            <h1 class="font-title text-6xl md:text-[140px] leading-none font-bold mb-10 reveal" id="main-title">
-                YASSINE <br> <span class="text-transparent border-t border-b border-white/10" style="-webkit-text-stroke: 1px white;">SAOUD</span>
+    <section id="home" class="min-h-screen flex items-center px-[8%]">
+        <div class="max-w-5xl">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-8 reveal">
+                <span class="text-emerald">Beginner</span> <br>
+                <span class="text-sky">Front-end</span> <br>
+                <span class="text-accent">Developer</span>
             </h1>
-            
-            <div class="h-20 flex items-center justify-center reveal">
-                <span id="type-target" class="font-code text-xl md:text-2xl text-white/40"></span>
-                <span class="w-1 h-8 bg-accent ml-2 animate-pulse"></span>
+
+            <div class="h-10 mb-6 reveal">
+                <span id="typewriter" class="text-2xl md:text-3xl font-light text-white/60"></span>
             </div>
 
-            <div class="mt-16 reveal">
-                <a href="#projects" class="magnetic-wrap group">
-                    <div class="glass-panel px-16 py-6 rounded-full text-xs font-title tracking-[0.4em] uppercase hover:bg-white hover:text-black transition-all">
-                        Initiate Protocol
-                    </div>
+            <p class="text-white/40 text-xl max-w-2xl mb-12 font-light reveal">
+                Crafting modern web solutions with focus on usability and innovation.
+            </p>
+
+            <div class="flex flex-wrap gap-5 mb-16 reveal">
+                <div class="home-tag">HTML5</div>
+                <div class="home-tag">CSS3</div>
+                <div class="home-tag">JAVASCRIPT</div>
+                <div class="home-tag">REACT</div>
+                <div class="home-tag">TAILWIND</div>
+            </div>
+
+            <div class="flex gap-10 reveal">
+                <a href="https://github.com/yassinsaoud88" target="_blank" class="text-4xl hover:text-accent transition-transform hover:scale-125">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="w-10 h-10 invert">
+                </a>
+                <a href="mailto:yassinsaoud88@gmail.com" class="text-4xl hover:text-accent transition-transform hover:scale-125">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" class="w-10 h-10">
                 </a>
             </div>
         </div>
-
-        <div class="absolute bottom-10 flex flex-col items-center gap-4 opacity-30">
-            <div class="w-[1px] h-20 bg-gradient-to-b from-accent to-transparent"></div>
-            <span class="font-code text-[8px] tracking-[0.5em] vertical-text">SCROLL</span>
-        </div>
     </section>
 
-    <section id="about" class="section-padding relative">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-12 gap-20 items-start">
-                
-                <div class="lg:col-span-5 reveal">
-                    <h2 class="font-title text-4xl font-bold mb-8">THE <br><span class="text-accent">PHILOSOPHY</span></h2>
-                    <div class="w-20 h-[2px] bg-accent mb-12"></div>
-                </div>
-
-                <div class="lg:col-span-7 space-y-10 reveal">
-                    <p class="font-body text-2xl font-light text-white/70 leading-relaxed italic">
-                        "In the realm of digital architecture, I am a <span class="text-white font-bold underline decoration-accent/50 underline-offset-8">Front-End Sculptor</span> in training. I don't just build interfaces; I encode potential."
+    <section id="about" class="py-32 px-[8%]">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-24 items-center mb-24">
+                <div class="reveal">
+                    <h2 class="text-5xl font-black mb-10 italic">About Me</h2>
+                    <p class="text-xl text-white/60 leading-relaxed font-light">
+                        Coming from a background in Physical Sciences, I’ve always been fascinated by how complex systems work. Today, I apply that same analytical mindset to Web Development. I am currently dedicated to mastering the art of building robust web applications with a focus on clean code and user-centric design.
+                        <br><br>
+                        My journey is one of continuous growth—moving from scientific theories to digital solutions, with a roadmap leading towards AI and Data Science by 2027.
                     </p>
-                    <p class="font-body text-lg text-white/40 leading-relaxed text-justify">
-                        Known in the network as <span class="text-accent font-code">Sheild</span>, I am currently navigating the complex layers of modern web development. My focus lies in the intersection of mathematical precision and aesthetic fluidity. I believe that being a "Beginner" is the most powerful state of mind—it's where the most explosive growth occurs. 
-                    </p>
-                    <div class="grid grid-cols-2 gap-8 pt-10">
-                        <div class="border-l border-white/10 pl-6">
-                            <span class="font-code text-[10px] text-accent block mb-2 uppercase tracking-widest">Growth_Rate</span>
-                            <span class="font-title text-3xl font-bold">EXPONENTIAL</span>
-                        </div>
-                        <div class="border-l border-white/10 pl-6">
-                            <span class="font-code text-[10px] text-accent block mb-2 uppercase tracking-widest">Mindset</span>
-                            <span class="font-title text-3xl font-bold">UNSTOPPABLE</span>
-                        </div>
+                </div>
+
+                <div class="grid gap-6">
+                    <div onclick="window.location.href='#portfolio'" class="stat-card reveal group">
+                        <span class="text-6xl font-black text-white leading-none italic group-hover:text-emerald transition-colors">Under Dev.</span>
+                        <span class="text-xl font-bold uppercase tracking-widest text-white/30">Total Projects</span>
                     </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="section-padding bg-deep/50 relative overflow-hidden">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col items-center mb-24">
-                <span class="font-code text-accent text-[10px] tracking-[1em] mb-4">ENGINE_SPECIFICATIONS</span>
-                <h2 class="font-title text-5xl font-bold text-center">CURRENT_STACK</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div class="glass-panel p-10 rounded-3xl reveal group">
-                    <div class="flex justify-between items-start mb-12">
-                        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent font-code">01</div>
-                        <span class="font-code text-[10px] text-white/20">STATUS: EVOLVING</span>
+                    <div onclick="window.location.href='#portfolio'" class="stat-card reveal group">
+                        <span class="text-6xl font-black text-white leading-none italic group-hover:text-sky transition-colors">+3</span>
+                        <span class="text-xl font-bold uppercase tracking-widest text-white/30">Certificates</span>
                     </div>
-                    <h3 class="font-title text-lg mb-4">VISUAL ARCHITECTURE</h3>
-                    <p class="text-white/40 font-light text-sm mb-8">Mastering the structural integrity of HTML5 and the aesthetic dimensions of Modern CSS.</p>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="75%"></div></div>
-                </div>
-
-                <div class="glass-panel p-10 rounded-3xl reveal group">
-                    <div class="flex justify-between items-start mb-12">
-                        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent font-code">02</div>
-                        <span class="font-code text-[10px] text-white/20">STATUS: COMPILING</span>
-                    </div>
-                    <h3 class="font-title text-lg mb-4">LOGIC & DYNAMICS</h3>
-                    <p class="text-white/40 font-light text-sm mb-8">Deep diving into JavaScript (ES6+) and logic-driven UI behaviors.</p>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="45%"></div></div>
-                </div>
-
-                <div class="glass-panel p-10 rounded-3xl reveal group">
-                    <div class="flex justify-between items-start mb-12">
-                        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent font-code">03</div>
-                        <span class="font-code text-[10px] text-white/20">STATUS: INITIALIZING</span>
-                    </div>
-                    <h3 class="font-title text-lg mb-4">MODERN ECOSYSTEMS</h3>
-                    <p class="text-white/40 font-light text-sm mb-8">Learning frameworks like React and Tailwind to build scalable systems.</p>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="30%"></div></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="section-padding relative">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-between items-end mb-24">
-                <div>
-                    <span class="font-code text-accent text-[10px] tracking-[0.5em] mb-4 block">WORKSPACE_01</span>
-                    <h2 class="font-title text-6xl font-bold italic">THE LAB</h2>
-                </div>
-                <div class="hidden lg:block text-right max-w-xs font-code text-[10px] text-white/20">
-                    // ALL PROJECTS ARE CURRENTLY IN HYPER-SLEEP MODE WHILE CORE LEARNING IS COMPLETED.
-                </div>
-            </div>
-
-            <div class="relative group">
-                <div class="absolute inset-0 bg-accent/5 blur-[120px] rounded-full scale-0 group-hover:scale-100 transition-all duration-1000"></div>
-                
-                <div class="glass-panel p-20 rounded-[4rem] text-center border-dashed relative overflow-hidden">
-                    <div class="absolute top-10 left-10 font-code text-[10px] text-accent/30 animate-pulse">SYSTEM_BUSY: RENDERING_FUTURE</div>
-                    
-                    <div id="project-loader" class="mb-12 inline-block">
-                        <svg class="w-32 h-32 text-accent" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="283" stroke-dashoffset="283" id="circle-anim"></circle>
-                        </svg>
-                    </div>
-
-                    <h3 class="font-title text-4xl font-bold mb-6 tracking-tighter">PROJECTS_IN_PROGRESS</h3>
-                    <p class="font-body text-white/30 text-xl max-w-2xl mx-auto mb-10">
-                        I am currently synthesizing multiple mini-apps to showcase my grip on modern UI. The deployment will be massive. Stay tuned for the unveiling.
-                    </p>
-
-                    <div class="flex justify-center gap-10">
-                        <div class="text-center">
-                            <div class="font-title text-2xl">08</div>
-                            <div class="font-code text-[9px] text-accent uppercase">Prototypes</div>
-                        </div>
-                        <div class="text-center border-x border-white/10 px-10">
-                            <div class="font-title text-2xl">--</div>
-                            <div class="font-code text-[9px] text-accent uppercase">Live_Links</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="font-title text-2xl">∞</div>
-                            <div class="font-code text-[9px] text-accent uppercase">Ambition</div>
-                        </div>
+                    <div onclick="window.location.href='#portfolio'" class="stat-card reveal group">
+                        <span class="text-6xl font-black text-white leading-none italic group-hover:text-accent transition-colors">+7 Months</span>
+                        <span class="text-xl font-bold uppercase tracking-widest text-white/30">Experience</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section-padding bg-white text-black rounded-t-[4rem]">
-        <div class="container mx-auto px-6">
+    <section id="portfolio" class="py-32 px-[8%] bg-[#050505]">
+        <div class="text-center mb-24 reveal">
+            <h2 class="text-6xl font-black mb-4 italic">Portfolio Showcase</h2>
+            <div class="flex justify-center gap-6 mt-12 overflow-x-auto pb-4">
+                <button class="tab-trigger active" onclick="switchTab('projects', this)">Projects</button>
+                <button class="tab-trigger" onclick="switchTab('certs', this)">Certificates</button>
+                <button class="tab-trigger" onclick="switchTab('stack', this)">Tech Stack</button>
+            </div>
+        </div>
+
+        <div id="tab-content" class="max-w-6xl mx-auto min-h-[400px]">
+            <div id="p-projects" class="grid md:grid-cols-3 gap-8 reveal">
+                <div class="icon-box p-12 text-center">
+                    <h4 class="text-2xl font-bold mb-4 text-emerald">Minimalist Landing</h4>
+                    <p class="text-white/40 leading-relaxed">A high-performance website focusing on clean typography and smooth animations.</p>
+                </div>
+                <div class="icon-box p-12 text-center">
+                    <h4 class="text-2xl font-bold mb-4 text-emerald">Scientific Logic App</h4>
+                    <p class="text-white/40 leading-relaxed">A web application utilizing my physics background to solve complex calculations.</p>
+                </div>
+                <div class="icon-box p-12 text-center">
+                    <h4 class="text-2xl font-bold mb-4 text-emerald">Philosophical Quotes Hub</h4>
+                    <p class="text-white/40 leading-relaxed">A personal project bridging my TikTok content with web functionality.</p>
+                </div>
+            </div>
+
+            <div id="p-certs" class="hidden grid md:grid-cols-2 gap-8 reveal">
+                <div class="icon-box !flex-row gap-8 p-10 text-left w-full">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/FreeCodeCamp_logo.png" class="w-20 invert">
+                    <div>
+                        <h4 class="text-2xl font-bold">FreeCodeCamp Certification</h4>
+                        <p class="text-accent font-mono uppercase tracking-widest mt-2">Responsive Web Design</p>
+                        <p class="text-white/30 text-sm mt-4 italic">Validated proficiency in modern CSS3, HTML5, and layout design.</p>
+                    </div>
+                </div>
+                <div class="icon-box !flex-row gap-8 p-10 text-left w-full">
+                    <div class="text-5xl">🎓</div>
+                    <div>
+                        <h4 class="text-2xl font-bold">JavaScript Node Specialist</h4>
+                        <p class="text-sky font-mono uppercase tracking-widest mt-2">Logic & Algorithms</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="p-stack" class="hidden grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 reveal">
+                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/174/174854.png" class="w-16"><span class="font-bold">HTML5</span></div>
+                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" class="w-16"><span class="font-bold">CSS3</span></div>
+                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" class="w-16"><span class="font-bold">JavaScript</span></div>
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" class="w-16"><span class="font-bold">Tailwind</span></div>
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" class="w-16"><span class="font-bold">React</span></div>
+                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/919/919825.png" class="w-16"><span class="font-bold">Node.js</span></div>
+                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968381.png" class="w-16"><span class="font-bold">TypeScript</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 px-[8%]">
+        <div class="max-w-5xl mx-auto bg-white/5 border border-white/10 p-12 md:p-24 rounded-[60px] reveal relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald via-accent to-sky"></div>
             <div class="grid lg:grid-cols-2 gap-20">
                 <div>
-                    <h2 class="font-title text-7xl font-bold leading-none mb-12">LET'S <br> SYNC UP.</h2>
-                    <p class="font-body text-xl mb-12 text-black/60">Currently available for collaborations, learning groups, or mentorship opportunities. Open your terminal and send a ping.</p>
-                    
-                    <div class="space-y-6">
-                        <a href="mailto:yassinsaoud88@gmail.com" class="block group">
-                            <span class="font-code text-[10px] text-black/30 block mb-1 uppercase tracking-widest">Email_Address</span>
-                            <span class="font-title text-2xl group-hover:text-accent group-hover:pl-4 transition-all">yassinsaoud88@gmail.com</span>
-                        </a>
-                        <a href="https://github.com/yassinsaoud88" class="block group">
-                            <span class="font-code text-[10px] text-black/30 block mb-1 uppercase tracking-widest">Github_Profile</span>
-                            <span class="font-title text-2xl group-hover:text-accent group-hover:pl-4 transition-all">github.com/yassinsaoud88</span>
-                        </a>
+                    <h2 class="text-6xl font-black mb-10 leading-none italic">Let’s build <br> something <br> <span class="text-accent">meaningful.</span></h2>
+                    <div class="space-y-6 text-xl">
+                        <p class="text-white/40 font-mono">Email: <span class="text-white">yassinsaoud88@gmail.com</span></p>
+                        <p class="text-white/40 font-mono">GitHub: <span class="text-white underline italic">github.com/yassinsaoud88</span></p>
                     </div>
                 </div>
-
-                <div class="bg-black text-white p-12 rounded-[3rem]">
-                    <form class="space-y-8" onsubmit="return false">
-                        <div class="space-y-2">
-                            <label class="font-code text-[9px] uppercase text-white/30">User_Identity</label>
-                            <input type="text" placeholder="WHO ARE YOU?" class="w-full bg-transparent border-b border-white/10 py-4 focus:border-accent outline-none font-title transition-all">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="font-code text-[9px] uppercase text-white/30">Return_Channel</label>
-                            <input type="email" placeholder="YOUR@EMAIL.COM" class="w-full bg-transparent border-b border-white/10 py-4 focus:border-accent outline-none font-title transition-all">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="font-code text-[9px] uppercase text-white/30">Signal_Content</label>
-                            <textarea placeholder="WRITE YOUR MESSAGE..." rows="4" class="w-full bg-transparent border-b border-white/10 py-4 focus:border-accent outline-none font-title transition-all"></textarea>
-                        </div>
-                        <button class="w-full py-6 bg-accent text-black font-title font-bold text-xs tracking-[0.5em] uppercase hover:bg-white transition-all">
-                            Transmit_Signal
-                        </button>
-                    </form>
-                </div>
+                <form class="space-y-6" onsubmit="event.preventDefault()">
+                    <input type="text" placeholder="Name" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-accent transition-all">
+                    <input type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-accent transition-all">
+                    <textarea placeholder="Your Message" rows="4" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-accent transition-all"></textarea>
+                    <button class="w-full py-5 bg-accent text-void font-black text-xl rounded-2xl hover:scale-95 transition-all">Send Signal</button>
+                </form>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 px-10 flex flex-col md:flex-row justify-between items-center bg-black gap-10">
-        <div class="font-code text-[9px] text-white/20">©2026 SHEILD_GENIUS_CORE // ALL RIGHTS RESERVED.</div>
-        <div class="flex gap-8 font-title text-[9px] tracking-[0.3em]">
-            <a href="#" class="hover:text-accent">TWITTER</a>
-            <a href="#" class="hover:text-accent">LINKEDIN</a>
-            <a href="#" class="hover:text-accent">GITHUB</a>
-        </div>
-        <div class="font-code text-[9px] text-accent animate-pulse uppercase">Status: Constantly Growing</div>
+    <footer class="py-20 text-center text-white/10 font-mono text-xs tracking-[1em] uppercase">
+        © 2026 Yassine Saoud · Professional Core
     </footer>
 
     <script>
-        // 1. SYSTEM INITIALIZATION
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            const loadCount = document.getElementById('load-count');
-            const loadBar = document.getElementById('load-bar');
-            
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.floor(Math.random() * 5) + 1;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    gsap.to(preloader, { 
-                        y: '-100%', 
-                        duration: 1.5, 
-                        ease: "expo.inOut",
-                        onComplete: () => {
-                            preloader.style.display = 'none';
-                            runEntranceAnimations();
-                        }
-                    });
-                }
-                loadCount.innerText = progress.toString().padStart(2, '0');
-                loadBar.style.width = progress + '%';
-            }, 50);
-        });
-
-        // 2. CURSOR ARCHITECTURE
-        const cursor = document.getElementById('cursor');
-        const follower = document.getElementById('cursor-follower');
-        
-        document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX - 10, y: e.clientY - 10, duration: 0.1 });
-            gsap.to(follower, { x: e.clientX - 20, y: e.clientY - 20, duration: 0.6, ease: "power2.out" });
-        });
-
-        // Interactive Cursor States
-        document.querySelectorAll('a, button, .glass-panel').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(4)';
-                cursor.style.background = 'transparent';
-                cursor.style.border = '1px solid #00f3ff';
-                follower.style.opacity = '0';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursor.style.background = '#00f3ff';
-                cursor.style.border = 'none';
-                follower.style.opacity = '1';
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.reveal').forEach(el => {
+            gsap.to(el, {
+                scrollTrigger: { trigger: el, start: "top 85%" },
+                opacity: 1, y: 0, scale: 1, duration: 1, ease: "power4.out"
             });
         });
-
-        // 3. ENTRANCE ANIMATIONS
-        function runEntranceAnimations() {
-            gsap.registerPlugin(ScrollTrigger, TextPlugin);
-
-            // Hero Text Entrance
-            gsap.utils.toArray('.reveal').forEach((el, i) => {
-                gsap.to(el, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.5,
-                    delay: 0.2 * i,
-                    ease: "expo.out"
-                });
-            });
-
-            // BG Scroll Text Logic
-            gsap.to("#bg-scroll", {
-                xPercent: -50,
-                repeat: -1,
-                duration: 20,
-                ease: "linear"
-            });
-
-            // Initialize Typewriter
-            typeEffect();
-
-            // Skill Bars Scroll Trigger
-            gsap.utils.toArray('.skill-bar-fill').forEach(bar => {
-                gsap.to(bar, {
-                    scrollTrigger: {
-                        trigger: bar,
-                        start: "top 90%",
-                    },
-                    width: bar.dataset.width,
-                    duration: 2,
-                    ease: "power4.out"
-                });
-            });
-
-            // Project Circle Loader
-            gsap.to("#circle-anim", {
-                strokeDashoffset: 0,
-                scrollTrigger: {
-                    trigger: "#project-loader",
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    scrub: true
-                }
-            });
+        const dot = document.getElementById('c-dot');
+        const ring = document.getElementById('c-ring');
+        window.addEventListener('mousemove', e => {
+            gsap.to(dot, { x: e.clientX - 4, y: e.clientY - 4, duration: 0 });
+            gsap.to(ring, { x: e.clientX - 22.5, y: e.clientY - 22.5, duration: 0.15 });
+        });
+        const lines = ["Programming Enthusiast", "Computer Science Student | Web Developer"];
+        let l = 0, c = 0, del = false;
+        function type() {
+            const target = document.getElementById('typewriter');
+            const curr = lines[l];
+            target.innerText = del ? curr.substring(0, c--) : curr.substring(0, c++);
+            if (!del && c === curr.length + 1) { del = true; setTimeout(type, 2000); }
+            else if (del && c === 0) { del = false; l = (l + 1) % lines.length; setTimeout(type, 500); }
+            else { setTimeout(type, del ? 50 : 100); }
         }
-
-        // 4. PERSISTENT TYPEWRITER ENGINE
-        const roles = [
-            "BEGINNER FRONT-END ARCHITECT",
-            "LOGIC SENSITIVE DEVELOPER",
-            "INTERFACE SCULPTOR IN PROGRESS",
-            "SHEILD OS INITIALIZING..."
-        ];
-        
-        let wordCount = 0;
-        let charCount = 0;
-        let deleting = false;
-        const target = document.getElementById('type-target');
-
-        function typeEffect() {
-            const currentRole = roles[wordCount];
-            
-            if (deleting) {
-                target.innerText = currentRole.substring(0, charCount--);
-            } else {
-                target.innerText = currentRole.substring(0, charCount++);
-            }
-
-            let speed = deleting ? 50 : 100;
-
-            if (!deleting && charCount === currentRole.length + 1) {
-                deleting = true;
-                speed = 2000;
-            } else if (deleting && charCount === 0) {
-                deleting = false;
-                wordCount = (wordCount + 1) % roles.length;
-                speed = 500;
-            }
-
-            setTimeout(typeEffect, speed);
+        type();
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab-trigger').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            ['projects', 'certs', 'stack'].forEach(t => document.getElementById(`p-${t}`).classList.add('hidden'));
+            const target = document.getElementById(`p-${tab}`);
+            target.classList.remove('hidden');
+            gsap.from(target, { opacity: 0, y: 20, duration: 0.5 });
         }
-
-        // 5. MAGNETIC ELEMENTS ENGINE
-        document.querySelectorAll('.magnetic-wrap').forEach(wrap => {
-            wrap.addEventListener('mousemove', (e) => {
-                const bound = wrap.getBoundingClientRect();
-                const x = e.clientX - bound.left - bound.width / 2;
-                const y = e.clientY - bound.top - bound.height / 2;
-                gsap.to(wrap, { x: x * 0.5, y: y * 0.5, duration: 0.4 });
-            });
-            wrap.addEventListener('mouseleave', () => {
-                gsap.to(wrap, { x: 0, y: 0, duration: 0.4 });
-            });
+        document.querySelectorAll('.stat-card, .icon-box, button, input, textarea').forEach(el => {
+            el.addEventListener('mouseenter', () => gsap.to(ring, { scale: 1.5, borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.1)' }));
+            el.addEventListener('mouseleave', () => gsap.to(ring, { scale: 1, borderColor: 'rgba(167,139,250,0.4)', backgroundColor: 'transparent' }));
         });
-
-        // 6. CONSOLE LOG MASTER
-        console.log("%c SYSTEM READY %c SHEILD_OS_V2 ", "background:#00f3ff; color:#000; font-weight:bold; padding:5px;", "background:#000; color:#00f3ff; border:1px solid #00f3ff; padding:5px;");
-        console.log("Current Mode: GENIUS GROWTH");
     </script>
 </body>
 </html>
