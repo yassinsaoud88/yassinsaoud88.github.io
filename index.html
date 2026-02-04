@@ -2,8 +2,8 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yassine Saoud | Sheild Final</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Yassine Saoud | Sheild Final Pro</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -14,12 +14,7 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        void: '#020202',
-                        accent: '#a78bfa',
-                        emerald: '#10b981',
-                        sky: '#3b82f6'
-                    }
+                    colors: { void: '#020202', accent: '#a78bfa', emerald: '#10b981', sky: '#3b82f6' }
                 }
             }
         }
@@ -27,43 +22,48 @@
 
     <style>
         * { cursor: none !important; }
-        body { background: #020202; color: #e5e7eb; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        @media (max-width: 1024px) { * { cursor: auto !important; } }
 
-        /* Cursor */
+        body { background: #020202; color: #e5e7eb; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; width: 100%; }
+        
+        /* Cursor Effects */
         #c-dot { position: fixed; width: 8px; height: 8px; background: #a78bfa; border-radius: 50%; z-index: 10000; pointer-events: none; }
         #c-ring { position: fixed; width: 45px; height: 45px; border: 2px solid rgba(167, 139, 250, 0.4); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        @media (max-width: 1024px) { #c-dot, #c-ring { display: none; } }
 
-        /* Pop Animation */
         .reveal { opacity: 0; transform: translateY(50px) scale(0.9); }
 
-        /* Tech Tags - Home */
+        /* Home Tags */
         .home-tag {
-            padding: 12px 24px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px; font-family: 'JetBrains Mono'; font-weight: 700; font-size: 16px;
-            transition: all 0.4s; color: #fff;
+            padding: 10px 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px; font-family: 'JetBrains Mono'; font-weight: 700; font-size: 14px;
+            transition: all 0.4s; color: #fff; white-space: nowrap;
         }
+        @media (min-width: 768px) { .home-tag { font-size: 16px; padding: 12px 24px; } }
         .home-tag:hover { background: rgba(167, 139, 250, 0.2); border-color: #a78bfa; transform: scale(1.1); box-shadow: 0 0 20px rgba(167,139,250,0.4); }
 
-        /* Bento Stats - About */
+        /* Stats Cards */
         .stat-card {
             background: #0d0f14; border: 1px solid rgba(255,255,255,0.05); border-radius: 25px;
-            padding: 30px; transition: 0.4s; cursor: pointer; display: flex; flex-direction: column; gap: 15px;
+            padding: 25px; transition: 0.4s; cursor: pointer; display: flex; flex-direction: column; gap: 10px;
         }
         .stat-card:hover { border-color: #a78bfa; background: #12141c; transform: translateY(-10px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
 
-        /* Portfolio Tabs */
+        /* Tabs */
         .tab-trigger { 
-            font-size: 20px; font-weight: 800; padding: 15px 35px; border-radius: 15px; 
+            font-size: 16px; font-weight: 800; padding: 12px 25px; border-radius: 15px; 
             transition: 0.4s; color: rgba(255,255,255,0.3); border: 2px solid transparent;
         }
+        @media (min-width: 768px) { .tab-trigger { font-size: 20px; padding: 15px 35px; } }
         .tab-trigger.active { color: #fff; background: rgba(167, 139, 250, 0.1); border-color: #a78bfa; }
 
-        /* Icons Styling */
         .icon-box {
-            padding: 25px; background: #0a0c10; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px; background: #0a0c10; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);
             display: flex; flex-direction: column; align-items: center; gap: 10px; transition: 0.3s;
         }
         .icon-box:hover { transform: scale(1.1); border-color: #a78bfa; box-shadow: 0 0 20px rgba(167,139,250,0.2); }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
@@ -71,9 +71,9 @@
     <div id="c-dot"></div>
     <div id="c-ring"></div>
 
-    <nav class="fixed top-0 w-full z-[1000] py-8 px-[8%] flex flex-row items-center backdrop-blur-xl border-b border-white/5">
-        <div class="text-2xl font-black tracking-tighter text-white mr-auto">Yassine Saoud</div>
-        <div class="hidden md:flex gap-12 font-mono text-sm uppercase tracking-widest ml-auto">
+    <nav class="fixed top-0 w-full z-[1000] py-6 px-[6%] md:px-[8%] flex flex-row items-center backdrop-blur-xl border-b border-white/5">
+        <div class="text-xl md:text-2xl font-black tracking-tighter text-white mr-auto">Yassine Saoud</div>
+        <div class="hidden sm:flex gap-6 md:gap-12 font-mono text-xs md:text-sm uppercase tracking-widest ml-auto">
             <a href="#home" class="hover:text-accent transition-colors">Home</a>
             <a href="#about" class="hover:text-accent transition-colors">About</a>
             <a href="#portfolio" class="hover:text-accent transition-colors">Portfolio</a>
@@ -81,23 +81,23 @@
         </div>
     </nav>
 
-    <section id="home" class="min-h-screen flex items-center px-[8%]">
+    <section id="home" class="min-h-screen flex items-center px-[6%] pt-20">
         <div class="max-w-5xl">
-            <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-8 reveal">
+            <h1 class="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 reveal">
                 <span class="text-emerald">Beginner</span> <br>
                 <span class="text-sky">Front-end</span> <br>
                 <span class="text-accent">Developer</span>
             </h1>
 
             <div class="h-10 mb-6 reveal">
-                <span id="typewriter" class="text-2xl md:text-3xl font-light text-white/60"></span>
+                <span id="typewriter" class="text-xl md:text-3xl font-light text-white/60"></span>
             </div>
 
-            <p class="text-white/40 text-xl max-w-2xl mb-12 font-light reveal">
+            <p class="text-white/40 text-lg md:text-xl max-w-2xl mb-12 font-light reveal leading-relaxed">
                 Crafting modern web solutions with focus on usability and innovation.
             </p>
 
-            <div class="flex flex-wrap gap-5 mb-16 reveal">
+            <div class="flex flex-wrap gap-3 md:gap-5 mb-16 reveal">
                 <div class="home-tag">HTML5</div>
                 <div class="home-tag">CSS3</div>
                 <div class="home-tag">JAVASCRIPT</div>
@@ -106,22 +106,22 @@
             </div>
 
             <div class="flex gap-10 reveal">
-                <a href="https://github.com/yassinsaoud88" target="_blank" class="text-4xl hover:text-accent transition-transform hover:scale-125">
+                <a href="https://github.com/yassinsaoud88" target="_blank" class="hover:scale-125 transition-transform">
                     <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="w-10 h-10 invert">
                 </a>
-                <a href="mailto:yassinsaoud88@gmail.com" class="text-4xl hover:text-accent transition-transform hover:scale-125">
+                <a href="mailto:yassinsaoud88@gmail.com" class="hover:scale-125 transition-transform">
                     <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" class="w-10 h-10">
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-32 px-[8%]">
+    <section id="about" class="py-32 px-[6%]">
         <div class="max-w-6xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-24 items-center mb-24">
+            <div class="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
                 <div class="reveal">
-                    <h2 class="text-5xl font-black mb-10 italic">About Me</h2>
-                    <p class="text-xl text-white/60 leading-relaxed font-light">
+                    <h2 class="text-5xl md:text-6xl font-black mb-10 italic">About Me</h2>
+                    <p class="text-lg md:text-xl text-white/60 leading-relaxed font-light mb-8">
                         Coming from a background in Physical Sciences, I’ve always been fascinated by how complex systems work. Today, I apply that same analytical mindset to Web Development. I am currently dedicated to mastering the art of building robust web applications with a focus on clean code and user-centric design.
                         <br><br>
                         My journey is one of continuous growth—moving from scientific theories to digital solutions, with a roadmap leading towards AI and Data Science by 2027.
@@ -130,26 +130,26 @@
 
                 <div class="grid gap-6">
                     <div onclick="window.location.href='#portfolio'" class="stat-card reveal group">
-                        <span class="text-6xl font-black text-white leading-none italic group-hover:text-emerald transition-colors">Under Dev.</span>
-                        <span class="text-xl font-bold uppercase tracking-widest text-white/30">Total Projects</span>
+                        <span class="text-4xl md:text-6xl font-black text-white leading-none italic group-hover:text-emerald transition-colors">Under Dev.</span>
+                        <span class="text-lg md:text-xl font-bold uppercase tracking-widest text-white/30">Total Projects</span>
                     </div>
                     <div onclick="window.location.href='#portfolio'" class="stat-card reveal group">
-                        <span class="text-6xl font-black text-white leading-none italic group-hover:text-sky transition-colors">+3</span>
-                        <span class="text-xl font-bold uppercase tracking-widest text-white/30">Certificates</span>
+                        <span class="text-4xl md:text-6xl font-black text-white leading-none italic group-hover:text-sky transition-colors">+3</span>
+                        <span class="text-lg md:text-xl font-bold uppercase tracking-widest text-white/30">Certificates</span>
                     </div>
                     <div onclick="window.location.href='#portfolio'" class="stat-card reveal group">
-                        <span class="text-6xl font-black text-white leading-none italic group-hover:text-accent transition-colors">+7 Months</span>
-                        <span class="text-xl font-bold uppercase tracking-widest text-white/30">Experience</span>
+                        <span class="text-4xl md:text-6xl font-black text-white leading-none italic group-hover:text-accent transition-colors">+7 Months</span>
+                        <span class="text-lg md:text-xl font-bold uppercase tracking-widest text-white/30">Experience</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="py-32 px-[8%] bg-[#050505]">
+    <section id="portfolio" class="py-32 px-[6%] bg-[#050505]">
         <div class="text-center mb-24 reveal">
-            <h2 class="text-6xl font-black mb-4 italic">Portfolio Showcase</h2>
-            <div class="flex justify-center gap-6 mt-12 overflow-x-auto pb-4">
+            <h2 class="text-5xl md:text-6xl font-black mb-4 italic">Portfolio Showcase</h2>
+            <div class="flex justify-center gap-4 md:gap-6 mt-12 overflow-x-auto pb-4 no-scrollbar">
                 <button class="tab-trigger active" onclick="switchTab('projects', this)">Projects</button>
                 <button class="tab-trigger" onclick="switchTab('certs', this)">Certificates</button>
                 <button class="tab-trigger" onclick="switchTab('stack', this)">Tech Stack</button>
@@ -157,7 +157,7 @@
         </div>
 
         <div id="tab-content" class="max-w-6xl mx-auto min-h-[400px]">
-            <div id="p-projects" class="grid md:grid-cols-3 gap-8 reveal">
+            <div id="p-projects" class="grid grid-cols-1 md:grid-cols-3 gap-8 reveal">
                 <div class="icon-box p-12 text-center">
                     <h4 class="text-2xl font-bold mb-4 text-emerald">Minimalist Landing</h4>
                     <p class="text-white/40 leading-relaxed">A high-performance website focusing on clean typography and smooth animations.</p>
@@ -172,11 +172,11 @@
                 </div>
             </div>
 
-            <div id="p-certs" class="hidden grid md:grid-cols-2 gap-8 reveal">
+            <div id="p-certs" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
                 <div class="icon-box !flex-row gap-8 p-10 text-left w-full">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/FreeCodeCamp_logo.png" class="w-20 invert">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/FreeCodeCamp_logo.png" class="w-16 md:w-20 invert">
                     <div>
-                        <h4 class="text-2xl font-bold">FreeCodeCamp Certification</h4>
+                        <h4 class="text-xl md:text-2xl font-bold">FreeCodeCamp Certification</h4>
                         <p class="text-accent font-mono uppercase tracking-widest mt-2">Responsive Web Design</p>
                         <p class="text-white/30 text-sm mt-4 italic">Validated proficiency in modern CSS3, HTML5, and layout design.</p>
                     </div>
@@ -184,38 +184,36 @@
                 <div class="icon-box !flex-row gap-8 p-10 text-left w-full">
                     <div class="text-5xl">🎓</div>
                     <div>
-                        <h4 class="text-2xl font-bold">JavaScript Node Specialist</h4>
+                        <h4 class="text-xl md:text-2xl font-bold">JavaScript Node Specialist</h4>
                         <p class="text-sky font-mono uppercase tracking-widest mt-2">Logic & Algorithms</p>
                     </div>
                 </div>
             </div>
 
-            <div id="p-stack" class="hidden grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 reveal">
+            <div id="p-stack" class="hidden grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6 reveal">
                 <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/174/174854.png" class="w-16"><span class="font-bold">HTML5</span></div>
                 <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" class="w-16"><span class="font-bold">CSS3</span></div>
                 <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" class="w-16"><span class="font-bold">JavaScript</span></div>
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" class="w-16"><span class="font-bold">Tailwind</span></div>
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" class="w-16"><span class="font-bold">React</span></div>
                 <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/919/919825.png" class="w-16"><span class="font-bold">Node.js</span></div>
-                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968381.png" class="w-16"><span class="font-bold">TypeScript</span></div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-32 px-[8%]">
-        <div class="max-w-5xl mx-auto bg-white/5 border border-white/10 p-12 md:p-24 rounded-[60px] reveal relative overflow-hidden">
+    <section id="contact" class="py-32 px-[6%]">
+        <div class="max-w-5xl mx-auto bg-white/5 border border-white/10 p-10 md:p-24 rounded-[60px] reveal relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald via-accent to-sky"></div>
             <div class="grid lg:grid-cols-2 gap-20">
                 <div>
-                    <h2 class="text-6xl font-black mb-10 leading-none italic">Let’s build <br> something <br> <span class="text-accent">meaningful.</span></h2>
-                    <div class="space-y-6 text-xl">
+                    <h2 class="text-5xl md:text-6xl font-black mb-10 leading-none italic text-white">Let’s build <br> something <br> <span class="text-accent">meaningful.</span></h2>
+                    <div class="space-y-6 text-lg md:text-xl">
                         <p class="text-white/40 font-mono">Email: <span class="text-white">yassinsaoud88@gmail.com</span></p>
                         <p class="text-white/40 font-mono">GitHub: <span class="text-white underline italic">github.com/yassinsaoud88</span></p>
                     </div>
                 </div>
                 <form class="space-y-6" onsubmit="event.preventDefault()">
                     <input type="text" placeholder="Name" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-accent transition-all">
-                    <input type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-accent transition-all">
                     <textarea placeholder="Your Message" rows="4" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-accent transition-all"></textarea>
                     <button class="w-full py-5 bg-accent text-void font-black text-xl rounded-2xl hover:scale-95 transition-all">Send Signal</button>
                 </form>
@@ -229,18 +227,16 @@
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
+
+        // Advanced Reveal
         gsap.utils.toArray('.reveal').forEach(el => {
             gsap.to(el, {
                 scrollTrigger: { trigger: el, start: "top 85%" },
                 opacity: 1, y: 0, scale: 1, duration: 1, ease: "power4.out"
             });
         });
-        const dot = document.getElementById('c-dot');
-        const ring = document.getElementById('c-ring');
-        window.addEventListener('mousemove', e => {
-            gsap.to(dot, { x: e.clientX - 4, y: e.clientY - 4, duration: 0 });
-            gsap.to(ring, { x: e.clientX - 22.5, y: e.clientY - 22.5, duration: 0.15 });
-        });
+
+        // Typewriter
         const lines = ["Programming Enthusiast", "Computer Science Student | Web Developer"];
         let l = 0, c = 0, del = false;
         function type() {
@@ -252,6 +248,17 @@
             else { setTimeout(type, del ? 50 : 100); }
         }
         type();
+
+        // Custom Cursor Logic
+        const dot = document.getElementById('c-dot');
+        const ring = document.getElementById('c-ring');
+        if(window.innerWidth > 1024) {
+            window.addEventListener('mousemove', e => {
+                gsap.to(dot, { x: e.clientX - 4, y: e.clientY - 4, duration: 0 });
+                gsap.to(ring, { x: e.clientX - 22.5, y: e.clientY - 22.5, duration: 0.15 });
+            });
+        }
+
         function switchTab(tab, btn) {
             document.querySelectorAll('.tab-trigger').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -260,10 +267,6 @@
             target.classList.remove('hidden');
             gsap.from(target, { opacity: 0, y: 20, duration: 0.5 });
         }
-        document.querySelectorAll('.stat-card, .icon-box, button, input, textarea').forEach(el => {
-            el.addEventListener('mouseenter', () => gsap.to(ring, { scale: 1.5, borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.1)' }));
-            el.addEventListener('mouseleave', () => gsap.to(ring, { scale: 1, borderColor: 'rgba(167,139,250,0.4)', backgroundColor: 'transparent' }));
-        });
     </script>
 </body>
 </html>
