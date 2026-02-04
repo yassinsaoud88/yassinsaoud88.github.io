@@ -2,8 +2,8 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yassine Saoud | Sheild Final Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yassine Saoud | Final Masterpiece</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -21,223 +21,229 @@
     </script>
 
     <style>
-        * { cursor: none !important; }
+        * { cursor: none !important; box-sizing: border-box; }
         @media (max-width: 1024px) { * { cursor: auto !important; } }
 
         body { background: #020202; color: #e5e7eb; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; width: 100%; }
-        
-        /* Cursor Effects */
+
+        .glow-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at var(--x) var(--y), rgba(167, 139, 250, 0.12) 0%, transparent 20%);
+            z-index: -1; pointer-events: none;
+        }
+
         #c-dot { position: fixed; width: 8px; height: 8px; background: #a78bfa; border-radius: 50%; z-index: 10000; pointer-events: none; }
-        #c-ring { position: fixed; width: 45px; height: 45px; border: 2px solid rgba(167, 139, 250, 0.4); border-radius: 50%; z-index: 9999; pointer-events: none; }
-        @media (max-width: 1024px) { #c-dot, #c-ring { display: none; } }
+        #c-ring { position: fixed; width: 40px; height: 40px; border: 2px solid rgba(167, 139, 250, 0.5); border-radius: 50%; z-index: 9999; pointer-events: none; }
 
-        .reveal { opacity: 0; transform: translateY(50px) scale(0.9); }
+        .reveal { opacity: 0; transform: translateY(40px); }
 
-        /* Home Tags */
         .home-tag {
-            padding: 10px 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px; font-family: 'JetBrains Mono'; font-weight: 700; font-size: 14px;
-            transition: all 0.4s; color: #fff; white-space: nowrap;
+            padding: 10px 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; font-family: 'JetBrains Mono'; font-weight: 700; font-size: 14px;
+            transition: 0.4s; color: #fff; white-space: nowrap;
         }
-        @media (min-width: 768px) { .home-tag { font-size: 16px; padding: 12px 24px; } }
-        .home-tag:hover { background: rgba(167, 139, 250, 0.2); border-color: #a78bfa; transform: scale(1.1); box-shadow: 0 0 20px rgba(167,139,250,0.4); }
+        .home-tag:hover { border-color: #a78bfa; background: rgba(167, 139, 250, 0.1); transform: scale(1.1) rotate(-2deg); }
 
-        /* Stats Cards */
-        .stat-card {
-            background: #0d0f14; border: 1px solid rgba(255,255,255,0.05); border-radius: 25px;
-            padding: 25px; transition: 0.4s; cursor: pointer; display: flex; flex-direction: column; gap: 10px;
+        .glass-card {
+            background: rgba(13, 15, 20, 0.6); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 25px; transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
-        .stat-card:hover { border-color: #a78bfa; background: #12141c; transform: translateY(-10px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .glass-card:hover { border-color: #a78bfa; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
 
-        /* Tabs */
         .tab-trigger { 
-            font-size: 16px; font-weight: 800; padding: 12px 25px; border-radius: 15px; 
-            transition: 0.4s; color: rgba(255,255,255,0.3); border: 2px solid transparent;
+            font-size: 16px; font-weight: 800; padding: 12px 24px; border-radius: 12px; 
+            transition: 0.4s; color: rgba(255,255,255,0.2);
         }
-        @media (min-width: 768px) { .tab-trigger { font-size: 20px; padding: 15px 35px; } }
-        .tab-trigger.active { color: #fff; background: rgba(167, 139, 250, 0.1); border-color: #a78bfa; }
+        .tab-trigger.active { color: #fff; background: rgba(167, 139, 250, 0.15); border: 1px solid #a78bfa; }
 
-        .icon-box {
-            padding: 20px; background: #0a0c10; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);
-            display: flex; flex-direction: column; align-items: center; gap: 10px; transition: 0.3s;
-        }
-        .icon-box:hover { transform: scale(1.1); border-color: #a78bfa; box-shadow: 0 0 20px rgba(167,139,250,0.2); }
-        
+        .break-title { word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; line-height: 1; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
 
+    <div class="glow-bg" id="glow"></div>
     <div id="c-dot"></div>
     <div id="c-ring"></div>
 
-    <nav class="fixed top-0 w-full z-[1000] py-6 px-[6%] md:px-[8%] flex flex-row items-center backdrop-blur-xl border-b border-white/5">
-        <div class="text-xl md:text-2xl font-black tracking-tighter text-white mr-auto">Yassine Saoud</div>
-        <div class="hidden sm:flex gap-6 md:gap-12 font-mono text-xs md:text-sm uppercase tracking-widest ml-auto">
-            <a href="#home" class="hover:text-accent transition-colors">Home</a>
-            <a href="#about" class="hover:text-accent transition-colors">About</a>
-            <a href="#portfolio" class="hover:text-accent transition-colors">Portfolio</a>
-            <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+    <nav class="fixed top-0 w-full z-[1000] py-5 px-[6%] flex justify-between items-center backdrop-blur-xl border-b border-white/5">
+        <div class="text-xl font-black tracking-tighter text-white">Yassine Saoud</div>
+        <div class="flex gap-5 md:gap-8 font-mono text-[10px] md:text-xs uppercase tracking-widest font-bold">
+            <a href="#home" class="hover:text-accent transition-all">Home</a>
+            <a href="#about" class="hover:text-accent transition-all">About</a>
+            <a href="#portfolio" class="hover:text-accent transition-all">Portfolio</a>
+            <a href="#contact" class="hover:text-accent transition-all">Contact</a>
         </div>
     </nav>
 
-    <section id="home" class="min-h-screen flex items-center px-[6%] pt-20">
-        <div class="max-w-5xl">
-            <h1 class="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 reveal">
-                <span class="text-emerald">Beginner</span> <br>
-                <span class="text-sky">Front-end</span> <br>
+    <section id="home" class="min-h-screen flex items-center px-[6%] pt-20 relative">
+        <div class="w-full">
+            <h1 class="text-[11vw] md:text-[8vw] font-black tracking-tighter leading-[0.9] mb-6 reveal break-title">
+                <span class="text-emerald">Beginner</span><br>
+                <span class="text-sky italic">Front-end</span><br>
                 <span class="text-accent">Developer</span>
             </h1>
-
-            <div class="h-10 mb-6 reveal">
-                <span id="typewriter" class="text-xl md:text-3xl font-light text-white/60"></span>
+            <div class="h-12 mb-8 reveal">
+                <span id="typewriter" class="text-lg md:text-3xl font-light text-white/50"></span>
             </div>
-
-            <p class="text-white/40 text-lg md:text-xl max-w-2xl mb-12 font-light reveal leading-relaxed">
+            <p class="text-white/40 text-base md:text-xl max-w-2xl mb-12 reveal">
                 Crafting modern web solutions with focus on usability and innovation.
             </p>
-
-            <div class="flex flex-wrap gap-3 md:gap-5 mb-16 reveal">
-                <div class="home-tag">HTML5</div>
-                <div class="home-tag">CSS3</div>
-                <div class="home-tag">JAVASCRIPT</div>
-                <div class="home-tag">REACT</div>
-                <div class="home-tag">TAILWIND</div>
-            </div>
-
-            <div class="flex gap-10 reveal">
-                <a href="https://github.com/yassinsaoud88" target="_blank" class="hover:scale-125 transition-transform">
-                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="w-10 h-10 invert">
-                </a>
-                <a href="mailto:yassinsaoud88@gmail.com" class="hover:scale-125 transition-transform">
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" class="w-10 h-10">
-                </a>
+            <div class="flex flex-wrap gap-3 mb-12 reveal">
+                <div class="home-tag">HTML5</div><div class="home-tag">CSS3</div><div class="home-tag">JAVASCRIPT</div>
+                <div class="home-tag">REACT</div><div class="home-tag">TAILWIND</div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-32 px-[6%]">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
-                <div class="reveal">
-                    <h2 class="text-5xl md:text-6xl font-black mb-10 italic">About Me</h2>
-                    <p class="text-lg md:text-xl text-white/60 leading-relaxed font-light mb-8">
-                        Coming from a background in Physical Sciences, I’ve always been fascinated by how complex systems work. Today, I apply that same analytical mindset to Web Development. I am currently dedicated to mastering the art of building robust web applications with a focus on clean code and user-centric design.
-                        <br><br>
-                        My journey is one of continuous growth—moving from scientific theories to digital solutions, with a roadmap leading towards AI and Data Science by 2027.
-                    </p>
+    <section id="about" class="py-24 px-[6%]">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <h2 class="text-5xl md:text-7xl font-black mb-8 italic tracking-tighter">About.</h2>
+                <p class="text-lg md:text-xl text-white/60 leading-relaxed font-light mb-10">
+                    Coming from a background in <span class="text-white">Physical Sciences</span>, I apply an analytical mindset to Web Development. Dedicated to mastery in building robust web applications.
+                    <br><br>
+                    My roadmap: mastering front-end today, leading <span class="text-accent">AI & Data Science</span> by 2027.
+                </p>
+                <div class="flex gap-6">
+                    <a href="https://github.com/yassinsaoud88" target="_blank" class="p-4 bg-white/5 rounded-2xl hover:bg-accent transition-all">
+                        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="w-8 h-8 invert">
+                    </a>
                 </div>
-
-                <div class="grid gap-6">
-                    <div onclick="window.location.href='#portfolio'" class="stat-card reveal group">
-                        <span class="text-4xl md:text-6xl font-black text-white leading-none italic group-hover:text-emerald transition-colors">Under Dev.</span>
-                        <span class="text-lg md:text-xl font-bold uppercase tracking-widest text-white/30">Total Projects</span>
+            </div>
+            <div class="grid gap-6">
+                <div class="glass-card p-10 reveal group">
+                    <h3 class="text-5xl md:text-6xl font-black text-white italic group-hover:text-emerald transition-colors">Under Dev.</h3>
+                    <p class="text-white/30 uppercase tracking-widest mt-2">Active Projects</p>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="glass-card p-8 reveal group text-center">
+                        <h3 class="text-4xl font-black group-hover:text-sky transition-colors">+3</h3>
+                        <p class="text-xs text-white/30 uppercase mt-2">Certificates</p>
                     </div>
-                    <div onclick="window.location.href='#portfolio'" class="stat-card reveal group">
-                        <span class="text-4xl md:text-6xl font-black text-white leading-none italic group-hover:text-sky transition-colors">+3</span>
-                        <span class="text-lg md:text-xl font-bold uppercase tracking-widest text-white/30">Certificates</span>
-                    </div>
-                    <div onclick="window.location.href='#portfolio'" class="stat-card reveal group">
-                        <span class="text-4xl md:text-6xl font-black text-white leading-none italic group-hover:text-accent transition-colors">+7 Months</span>
-                        <span class="text-lg md:text-xl font-bold uppercase tracking-widest text-white/30">Experience</span>
+                    <div class="glass-card p-8 reveal group text-center">
+                        <h3 class="text-4xl font-black group-hover:text-accent transition-colors">+7M</h3>
+                        <p class="text-xs text-white/30 uppercase mt-2">Experience</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="py-32 px-[6%] bg-[#050505]">
-        <div class="text-center mb-24 reveal">
-            <h2 class="text-5xl md:text-6xl font-black mb-4 italic">Portfolio Showcase</h2>
-            <div class="flex justify-center gap-4 md:gap-6 mt-12 overflow-x-auto pb-4 no-scrollbar">
+    <section id="portfolio" class="py-24 px-[6%] bg-[#030303]">
+        <div class="text-center mb-20 reveal">
+            <h2 class="text-5xl md:text-8xl font-black italic mb-10 tracking-tighter break-title">Portfolio.</h2>
+            <div class="flex justify-center gap-3 overflow-x-auto no-scrollbar pb-4">
                 <button class="tab-trigger active" onclick="switchTab('projects', this)">Projects</button>
                 <button class="tab-trigger" onclick="switchTab('certs', this)">Certificates</button>
                 <button class="tab-trigger" onclick="switchTab('stack', this)">Tech Stack</button>
             </div>
         </div>
 
-        <div id="tab-content" class="max-w-6xl mx-auto min-h-[400px]">
-            <div id="p-projects" class="grid grid-cols-1 md:grid-cols-3 gap-8 reveal">
-                <div class="icon-box p-12 text-center">
+        <div id="tab-content" class="max-w-6xl mx-auto">
+            <div id="p-projects" class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+                <div class="glass-card p-10 group">
                     <h4 class="text-2xl font-bold mb-4 text-emerald">Minimalist Landing</h4>
-                    <p class="text-white/40 leading-relaxed">A high-performance website focusing on clean typography and smooth animations.</p>
+                    <p class="text-white/40">Clean typography and motion design.</p>
                 </div>
-                <div class="icon-box p-12 text-center">
-                    <h4 class="text-2xl font-bold mb-4 text-emerald">Scientific Logic App</h4>
-                    <p class="text-white/40 leading-relaxed">A web application utilizing my physics background to solve complex calculations.</p>
-                </div>
-                <div class="icon-box p-12 text-center">
-                    <h4 class="text-2xl font-bold mb-4 text-emerald">Philosophical Quotes Hub</h4>
-                    <p class="text-white/40 leading-relaxed">A personal project bridging my TikTok content with web functionality.</p>
+                <div class="glass-card p-10 group">
+                    <h4 class="text-2xl font-bold mb-4 text-sky">Scientific App</h4>
+                    <p class="text-white/40">Physics logic in web solutions.</p>
                 </div>
             </div>
 
             <div id="p-certs" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
-                <div class="icon-box !flex-row gap-8 p-10 text-left w-full">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/FreeCodeCamp_logo.png" class="w-16 md:w-20 invert">
+                <div class="glass-card p-8 flex items-center gap-6">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/FreeCodeCamp_logo.png" class="w-16 invert">
                     <div>
-                        <h4 class="text-xl md:text-2xl font-bold">FreeCodeCamp Certification</h4>
-                        <p class="text-accent font-mono uppercase tracking-widest mt-2">Responsive Web Design</p>
-                        <p class="text-white/30 text-sm mt-4 italic">Validated proficiency in modern CSS3, HTML5, and layout design.</p>
-                    </div>
-                </div>
-                <div class="icon-box !flex-row gap-8 p-10 text-left w-full">
-                    <div class="text-5xl">🎓</div>
-                    <div>
-                        <h4 class="text-xl md:text-2xl font-bold">JavaScript Node Specialist</h4>
-                        <p class="text-sky font-mono uppercase tracking-widest mt-2">Logic & Algorithms</p>
+                        <h4 class="font-bold">FreeCodeCamp</h4>
+                        <p class="text-accent text-sm">Responsive Web Design</p>
                     </div>
                 </div>
             </div>
 
-            <div id="p-stack" class="hidden grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6 reveal">
-                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/174/174854.png" class="w-16"><span class="font-bold">HTML5</span></div>
-                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" class="w-16"><span class="font-bold">CSS3</span></div>
-                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" class="w-16"><span class="font-bold">JavaScript</span></div>
-                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" class="w-16"><span class="font-bold">Tailwind</span></div>
-                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" class="w-16"><span class="font-bold">React</span></div>
-                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/919/919825.png" class="w-16"><span class="font-bold">Node.js</span></div>
+            <div id="p-stack" class="hidden grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 reveal">
+                <div class="glass-card p-6 flex flex-col items-center gap-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174854.png" class="w-12 h-12 object-contain">
+                    <span class="font-bold text-[10px] tracking-widest">HTML5</span>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center gap-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" class="w-12 h-12 object-contain">
+                    <span class="font-bold text-[10px] tracking-widest">CSS3</span>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center gap-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" class="w-12 h-12 object-contain">
+                    <span class="font-bold text-[10px] tracking-widest">JAVASCRIPT</span>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center gap-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" class="w-12 h-12 object-contain">
+                    <span class="font-bold text-[10px] tracking-widest">TAILWIND</span>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center gap-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" class="w-12 h-12 object-contain">
+                    <span class="font-bold text-[10px] tracking-widest">REACT</span>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center gap-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/919/919825.png" class="w-12 h-12 object-contain invert">
+                    <span class="font-bold text-[10px] tracking-widest">NODE.JS</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-32 px-[6%]">
-        <div class="max-w-5xl mx-auto bg-white/5 border border-white/10 p-10 md:p-24 rounded-[60px] reveal relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald via-accent to-sky"></div>
-            <div class="grid lg:grid-cols-2 gap-20">
+    <section id="contact" class="py-24 px-[6%]">
+        <div class="max-w-5xl mx-auto glass-card p-10 md:p-20 reveal">
+            <div class="grid lg:grid-cols-2 gap-12">
                 <div>
-                    <h2 class="text-5xl md:text-6xl font-black mb-10 leading-none italic text-white">Let’s build <br> something <br> <span class="text-accent">meaningful.</span></h2>
-                    <div class="space-y-6 text-lg md:text-xl">
-                        <p class="text-white/40 font-mono">Email: <span class="text-white">yassinsaoud88@gmail.com</span></p>
-                        <p class="text-white/40 font-mono">GitHub: <span class="text-white underline italic">github.com/yassinsaoud88</span></p>
-                    </div>
+                    <h2 class="text-4xl md:text-6xl font-black italic mb-6 break-title uppercase">
+                        Let's build something <span class="text-accent underline">meaningful.</span>
+                    </h2>
+                    <p class="text-white/30 font-mono text-sm md:text-base break-all">yassinsaoud88@gmail.com</p>
                 </div>
                 <form class="space-y-6" onsubmit="event.preventDefault()">
-                    <input type="text" placeholder="Name" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-accent transition-all">
-                    <textarea placeholder="Your Message" rows="4" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-accent transition-all"></textarea>
-                    <button class="w-full py-5 bg-accent text-void font-black text-xl rounded-2xl hover:scale-95 transition-all">Send Signal</button>
+                    <input type="text" placeholder="NAME" class="w-full bg-white/5 border-b border-white/20 p-4 outline-none focus:border-accent transition-all text-lg font-bold">
+                    <textarea placeholder="MESSAGE" rows="3" class="w-full bg-white/5 border-b border-white/20 p-4 outline-none focus:border-accent transition-all text-lg font-bold"></textarea>
+                    <button class="w-full py-5 bg-white text-void font-black text-lg rounded-xl hover:bg-accent transition-all">SEND SIGNAL</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 text-center text-white/10 font-mono text-xs tracking-[1em] uppercase">
-        © 2026 Yassine Saoud · Professional Core
+    <footer class="py-12 text-center text-white/10 font-mono text-[10px] tracking-[1em] uppercase">
+        © 2026 Yassine Saoud
     </footer>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Advanced Reveal
-        gsap.utils.toArray('.reveal').forEach(el => {
+        // Interactive Glow
+        window.addEventListener('mousemove', (e) => {
+            const glow = document.getElementById('glow');
+            glow.style.setProperty('--x', e.clientX + 'px');
+            glow.style.setProperty('--y', e.clientY + 'px');
+        });
+
+        // Custom Cursor
+        const dot = document.getElementById('c-dot');
+        const ring = document.getElementById('c-ring');
+        if(window.innerWidth > 1024) {
+            window.addEventListener('mousemove', e => {
+                gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
+                gsap.to(ring, { x: e.clientX - 20, y: e.clientY - 20, duration: 0.2, ease: "power2.out" });
+            });
+        }
+
+        // Cinematic Reveal
+        gsap.utils.toArray('.reveal').forEach((el, i) => {
             gsap.to(el, {
-                scrollTrigger: { trigger: el, start: "top 85%" },
-                opacity: 1, y: 0, scale: 1, duration: 1, ease: "power4.out"
+                scrollTrigger: { trigger: el, start: "top 92%" },
+                opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: i * 0.03
             });
         });
 
         // Typewriter
-        const lines = ["Programming Enthusiast", "Computer Science Student | Web Developer"];
+        const lines = ["Programming Enthusiast", "Web Developer", "Problem Solver"];
         let l = 0, c = 0, del = false;
         function type() {
             const target = document.getElementById('typewriter');
@@ -249,23 +255,13 @@
         }
         type();
 
-        // Custom Cursor Logic
-        const dot = document.getElementById('c-dot');
-        const ring = document.getElementById('c-ring');
-        if(window.innerWidth > 1024) {
-            window.addEventListener('mousemove', e => {
-                gsap.to(dot, { x: e.clientX - 4, y: e.clientY - 4, duration: 0 });
-                gsap.to(ring, { x: e.clientX - 22.5, y: e.clientY - 22.5, duration: 0.15 });
-            });
-        }
-
         function switchTab(tab, btn) {
             document.querySelectorAll('.tab-trigger').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             ['projects', 'certs', 'stack'].forEach(t => document.getElementById(`p-${t}`).classList.add('hidden'));
             const target = document.getElementById(`p-${tab}`);
             target.classList.remove('hidden');
-            gsap.from(target, { opacity: 0, y: 20, duration: 0.5 });
+            gsap.from(target, { opacity: 0, scale: 0.98, y: 20, duration: 0.5 });
         }
     </script>
 </body>
